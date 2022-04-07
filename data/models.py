@@ -1,6 +1,5 @@
 from django.db import models
 from django.urls import reverse
-import uuid
 
 # Create your models here.
     
@@ -61,6 +60,7 @@ class Question(models.Model):
         return reverse('questions_url_out', args=[str(self.id)])
 
 class Comment(models.Model):
+    id=models.UUIDField(primary_key=True,default=uuid.uuid4,unique=True, max_length=36)
     video = models.ForeignKey(Video,on_delete=models.CASCADE,related_name='comments', null=True, blank=True)
     commenting = models.TextField()
     created_on = models.DateTimeField(auto_now_add=True)
